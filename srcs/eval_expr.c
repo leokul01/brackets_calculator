@@ -1,9 +1,21 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   eval_expr.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: rjoanna- <rjoanna-@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2018/09/09 11:50:04 by rjoanna-          #+#    #+#             */
+/*   Updated: 2018/09/09 11:50:05 by rjoanna-         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "ft_stacks.h"
 #include "ft_prototypes.h"
 
 t_op	*ft_create_t_op(char oper)
 {
-	t_op 	*new;
+	t_op	*new;
 
 	new = (t_op *)malloc(sizeof(t_op));
 	new->oper = oper;
@@ -72,7 +84,7 @@ int		ft_pull_from_nstack(t_nbr **nbr_stack)
 
 void	ft_pull_from_ostack(t_op **op_stack)
 {
-	t_op 	*tmp;
+	t_op	*tmp;
 
 	tmp = (*op_stack)->prev;
 	free(*op_stack);
@@ -87,9 +99,9 @@ void	ft_add_el_to_ostack(t_op *new, t_op **op_stack)
 
 int		eval_expr(char *str)
 {
-	t_op 	*op_stack;
+	t_op	*op_stack;
 	t_nbr	*nbr_stack;
-	t_op 	*new;
+	t_op	*new;
 	int		nbr;
 
 	op_stack = NULL;
@@ -112,12 +124,14 @@ int		eval_expr(char *str)
 				ft_add_el_to_ostack(new, &op_stack);
 			else if (op_stack->priority > new->priority)
 			{
-				nbr = op_stack->f(ft_pull_from_nstack(&nbr_stack), ft_pull_from_nstack(&nbr_stack));
+				nbr = op_stack->f(ft_pull_from_nstack(&nbr_stack),
+						ft_pull_from_nstack(&nbr_stack));
 				ft_pull_from_ostack(&op_stack);
 				ft_add_el_to_nstack(nbr, &nbr_stack);
 				if (op_stack && op_stack->priority == new->priority)
 				{
-					nbr = op_stack->f(ft_pull_from_nstack(&nbr_stack), ft_pull_from_nstack(&nbr_stack));
+					nbr = op_stack->f(ft_pull_from_nstack(&nbr_stack),
+							ft_pull_from_nstack(&nbr_stack));
 					ft_pull_from_ostack(&op_stack);
 					ft_add_el_to_nstack(nbr, &nbr_stack);
 				}
@@ -125,7 +139,8 @@ int		eval_expr(char *str)
 			}
 			else
 			{
-				nbr = op_stack->f(ft_pull_from_nstack(&nbr_stack), ft_pull_from_nstack(&nbr_stack));
+				nbr = op_stack->f(ft_pull_from_nstack(&nbr_stack),
+						ft_pull_from_nstack(&nbr_stack));
 				ft_pull_from_ostack(&op_stack);
 				ft_add_el_to_nstack(nbr, &nbr_stack);
 				ft_add_el_to_ostack(new, &op_stack);
@@ -141,7 +156,8 @@ int		eval_expr(char *str)
 		{
 			while (op_stack->oper != '(')
 			{
-				nbr = op_stack->f(ft_pull_from_nstack(&nbr_stack), ft_pull_from_nstack(&nbr_stack));
+				nbr = op_stack->f(ft_pull_from_nstack(&nbr_stack),
+						ft_pull_from_nstack(&nbr_stack));
 				ft_pull_from_ostack(&op_stack);
 				ft_add_el_to_nstack(nbr, &nbr_stack);
 			}
@@ -149,6 +165,13 @@ int		eval_expr(char *str)
 		}
 		str += (*str != '\0') ? 1 : 0;
 	}
-	nbr = op_stack->f(ft_pull_from_nstack(&nbr_stack), ft_pull_from_nstack(&nbr_stack));
+	while (nbr_stack)
+	{
+		nbr = op_stack->f(ft_pull_from_nstack(&nbr_stack),
+				ft_pull_from_nstack(&nbr_stack));
+		if (nbr_stack != NULL)
+			ft_add_el_to_nstack(nbr, &nbr_stack);
+		ft_pull_from_ostack(&op_stack);
+	}
 	return (nbr);
 }
