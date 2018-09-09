@@ -6,16 +6,18 @@
 /*   By: rjoanna- <rjoanna-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/09 11:50:26 by rjoanna-          #+#    #+#             */
-/*   Updated: 2018/09/09 11:50:27 by rjoanna-         ###   ########.fr       */
+/*   Updated: 2018/09/09 21:59:57 by rjoanna-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_prototypes.h"
+#include "ft_stacks.h"
 
-int		main(int argc, char **argv)
+int		main(int ac, char **av)
 {
-	if (argc == 2)
-		ft_putnbr(eval_expr(argv[1]));
-	ft_putchar('\n');
+	if (ac > 1)
+	{
+		ft_putnbr(eval_expr(av[1]));
+		ft_putchar('\n');
+	}
 	return (0);
 }

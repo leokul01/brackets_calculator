@@ -6,11 +6,11 @@
 /*   By: rjoanna- <rjoanna-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/09 11:50:21 by rjoanna-          #+#    #+#             */
-/*   Updated: 2018/09/09 11:50:22 by rjoanna-         ###   ########.fr       */
+/*   Updated: 2018/09/09 21:59:52 by rjoanna-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-void	ft_putchar(char c);
+#include "ft_stacks.h"
 
 void	ft_putnbr(int nb)
 {
