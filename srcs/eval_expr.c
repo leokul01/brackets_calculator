@@ -6,7 +6,7 @@
 /*   By: rjoanna- <rjoanna-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/09 11:50:04 by rjoanna-          #+#    #+#             */
-/*   Updated: 2018/09/09 21:59:34 by rjoanna-         ###   ########.fr       */
+/*   Updated: 2018/09/09 23:30:53 by rjoanna-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,8 @@ void	ft_pull_from_ostack(t_op **op_stack)
 
 void	ft_add_el_to_ostack(t_op *new, t_op **op_stack, t_nbr **nbr_stack)
 {
+	if ((*op_stack) != NULL && (*op_stack)->oper == '(' && new->oper == '(')
+		g_start_bracket = 0;
 	if ((*op_stack) != NULL && (*op_stack)->oper == '(' && g_start_bracket)
 		ft_add_el_to_nstack(0, nbr_stack);
 	if (*nbr_stack == NULL)
