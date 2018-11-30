@@ -1,5 +1,5 @@
-# Калькулятор со скобками на Си
-Калькулятор, поддерживающий скобки и простые операции. <br />
-Доступные операции: [+ - * / %] <br />
-Формат ввода: 1 + 3 * (4 + 9) / 3 <br />
-Между операциями и числами пробел опционален, после '(' пробел можно опустить, перед ')' тоже. <br />
+# Calculator with brackets on C
+Calculator supporting brackets and simple operators. <br />
+Available operators: [+ - * / %] <br />
+Example of input: 1 + 3 * (4 + 9) / 3 <br />
+Between operators and numbers space is optional. After '(' and ')' space can be omitted <br />
